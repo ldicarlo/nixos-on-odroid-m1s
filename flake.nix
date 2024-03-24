@@ -4,7 +4,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     uboot-src = {
       flake = false;
-      url = "github:ldicarlo/u-boot-m1s";
+      url = "github:u-boot/u-boot?rev=83cdab8b2c6ea0fc0860f8444d083353b47f1d5c";
       # url = "github:ldicarlo/u-boot-m1s?rev=83cdab8b2c6ea0fc0860f8444d083353b47f1d5c";
     };
   };
@@ -29,27 +29,19 @@
               gcc
             ];
         };
-      packages.x86_64-linux.uboot = x86_64pkgs.pkgsCross.aarch64-multiplatform.buildUBoot {
-        version = uboot-src.shortRev;
-        src = uboot-src;
-        defconfig = "odroid-c4_defconfig";
-        #  extraMeta.platforms = [ "aarch64-linux" ];
-        filesToInstall = [
-          #   "u-boot.itb"
-          #   "spl/u-boot-spl.bin"
-        ];
-        makeFlags = [
-          # "ARCH=arm64"
-          # "SHELL=${pkgs.bash}/bin/bash"
-          # "DTC=${pkgs.dtc}/bin/dtc"
-          # "CROSS_COMPILE=${pkgs.stdenv.cc.targetPrefix}"
-
-        ];
-        patches = [ ];
+      # https://github.com/gytis-ivaskevicius/orangepi-r1-plus-nixos-image/blob/3b6eb16c7aa406e10a9d8a0301bbe7a5a1cc7fe6/flake.nix#L30
+      packages.uboot = pkgs.buildUBoot rec {
+        extraMakeFlags = [ "all" "u-boot.itb" ];
+        defconfig = "nanopi-r2s-rk3328_defconfig";
+        extraMeta = {
+          platforms = [ "aarch64-linux" ];
+          license = pkgs.lib.licenses.unfreeRedistributableFirmware;
+        };
+        src = uboot;
+        version = uboot.rev;
       };
-    };
 
-}
+    }
 
 
 
