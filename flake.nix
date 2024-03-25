@@ -2,14 +2,14 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    uboot-src = {
+    uboot = {
       flake = false;
       url = "github:u-boot/u-boot?rev=83cdab8b2c6ea0fc0860f8444d083353b47f1d5c";
       # url = "github:ldicarlo/u-boot-m1s?rev=83cdab8b2c6ea0fc0860f8444d083353b47f1d5c";
     };
   };
   description = "Build image";
-  outputs = { self, nixpkgs, uboot-src, nixos-hardware, ... }:
+  outputs = { self, nixpkgs, uboot, nixos-hardware, ... }:
     let
       x86_64pkgs = nixpkgs.legacyPackages.${"x86_64-linux"};
     in
@@ -30,18 +30,19 @@
             ];
         };
       # https://github.com/gytis-ivaskevicius/orangepi-r1-plus-nixos-image/blob/3b6eb16c7aa406e10a9d8a0301bbe7a5a1cc7fe6/flake.nix#L30
-      packages.uboot = pkgs.buildUBoot rec {
+      defaultPackage.uboot = x86_64pkgs.buildUBoot rec {
         extraMakeFlags = [ "all" "u-boot.itb" ];
         defconfig = "nanopi-r2s-rk3328_defconfig";
         extraMeta = {
           platforms = [ "aarch64-linux" ];
-          license = pkgs.lib.licenses.unfreeRedistributableFirmware;
+          license = x86_64pkgs.lib.licenses.unfreeRedistributableFirmware;
         };
         src = uboot;
         version = uboot.rev;
       };
 
-    }
+    };
 
 
 
+}

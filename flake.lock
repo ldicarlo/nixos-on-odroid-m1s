@@ -35,10 +35,10 @@
       "inputs": {
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "uboot-src": "uboot-src"
+        "uboot": "uboot"
       }
     },
-    "uboot-src": {
+    "uboot": {
       "flake": false,
       "locked": {
         "lastModified": 1689088844,
