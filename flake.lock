@@ -41,17 +41,17 @@
     "uboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1689088844,
-        "narHash": "sha256-HPBjm/rIkfTCyAKCFvCqoK7oNN9e9rV9l32qLmI/qz4=",
-        "owner": "u-boot",
-        "repo": "u-boot",
-        "rev": "83cdab8b2c6ea0fc0860f8444d083353b47f1d5c",
+        "lastModified": 1711224898,
+        "narHash": "sha256-Kx2ZSD1O/wEZpONll5S/ygZmIS5CkPF7lEFbdCByFOQ=",
+        "owner": "ldicarlo",
+        "repo": "u-boot-m1s",
+        "rev": "e2e5be8cd7405f0038407c5ca69d81ac5eb1fae4",
         "type": "github"
       },
       "original": {
-        "owner": "u-boot",
-        "repo": "u-boot",
-        "rev": "83cdab8b2c6ea0fc0860f8444d083353b47f1d5c",
+        "owner": "ldicarlo",
+        "ref": "uboot-m1s",
+        "repo": "u-boot-m1s",
         "type": "github"
       }
     }
